@@ -70,8 +70,8 @@ class JSONHandler {
             dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
             return dateFormatter.stringFromDate(obj)
 
-        case let obj as NSURL where obj.absoluteString != nil:
-            return obj.absoluteString!
+        case let obj as NSURL where obj.absoluteString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0:
+            return obj.absoluteString
 
         default:
             Logger.info(message: "enforcing string on object")
